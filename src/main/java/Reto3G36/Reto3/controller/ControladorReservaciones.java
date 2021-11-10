@@ -1,6 +1,8 @@
 package Reto3G36.Reto3.controller;
 
 import Reto3G36.Reto3.model.Reservaciones;
+import Reto3G36.Reto3.reportes.ContadorClientes;
+import Reto3G36.Reto3.reportes.StatusReservas;
 import Reto3G36.Reto3.service.ServiciosReservaciones;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -42,5 +44,19 @@ public class ControladorReservaciones {
         return servicio.deleteReservation(reservationId);
     }
 
+    @GetMapping("/report-status")
+    public StatusReservas getReservas(){
+        return servicio.reporteStatusServicio();
+    }
+
+    @GetMapping("/report-dates/{dateOne}/{dateTwo}")
+    public List<Reservaciones> getReservasTiempo (@PathVariable("dateOne")String dateOne, @PathVariable("dateTwo")String dateTwo ){
+        return servicio.reporteTiempoServicio(dateOne, dateTwo);
+    }
+
+    @GetMapping("/report-clients")
+    public List<ContadorClientes> getClientes(){
+        return servicio.reporteClientesServicio();
+    }
 
 }
